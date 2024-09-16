@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class StockServiceTest {
 
     @Autowired
-    private StockService stockService;
+    private PessimisticLockStockService stockService;
 
     @Autowired
     private StockRepository stockRepository;
@@ -40,7 +40,7 @@ class StockServiceTest {
         stockService.decrease(1L, 1L);
 
         // then
-        Stock stock = stockRepository.findById(1L).orElseThrow();
+        Stock stock = stockRepository.findByProductId(1L);
         assertThat(stock.getQuantity()).isEqualTo(99);
     }
     
@@ -62,7 +62,7 @@ class StockServiceTest {
 
         latch.await();
 
-        Stock stock = stockRepository.findById(1L).orElseThrow();
+        Stock stock = stockRepository.findByProductId(1L);
         // 100 - (1 * 100) = 0
         assertThat(stock.getQuantity()).isEqualTo(0);
         /*
