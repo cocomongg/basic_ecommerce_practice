@@ -46,7 +46,6 @@ class StockServiceTest {
     
     @Test
     void 동시에_100개의_요청() throws InterruptedException {
-        // given
         int threadCount = 100;
         ExecutorService executorService = Executors.newFixedThreadPool(32);
         CountDownLatch latch = new CountDownLatch(threadCount);
