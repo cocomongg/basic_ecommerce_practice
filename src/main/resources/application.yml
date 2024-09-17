@@ -10,6 +10,10 @@ spring:
     password: password
     hikari:
       maximum-pool-size: 40
+  data:
+    redis:
+      port: 6379
+      host: localhost
 
 logging:
   level:
